@@ -44,18 +44,52 @@ export async function getDB(): Promise<DBClient> {
     };
   } else {
     // Embedded 100% PostgreSQL Engine (PGlite) storing data in ./data/fca_postgres
-    const dataDir = path.join(process.cwd(), 'data', 'fca_postgres');
-    if (!fs.existsSync(dataDir)) {
-      fs.mkdirSync(dataDir, { recursive: true });
+    let dataDir = path.join(process.cwd(), 'data', 'fca_postgres');
+
+    // In Vercel / AWS Lambda serverless environment, the file system is read-only except /tmp
+    if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) {
+      const tmpDir = path.join('/tmp', 'fca_postgres');
+      try {
+        if (!fs.existsSync(tmpDir)) {
+          fs.mkdirSync(tmpDir, { recursive: true });
+          if (fs.existsSync(dataDir)) {
+            fs.cpSync(dataDir, tmpDir, { recursive: true });
+          }
+        }
+        dataDir = tmpDir;
+      } catch (copyErr) {
+        console.warn('[DB] Could not copy database to /tmp, falling back to dataDir:', copyErr);
+      }
     }
-    const pglite = new PGlite(dataDir);
+
+    let pglite: PGlite;
+    try {
+      if (!fs.existsSync(dataDir)) {
+        fs.mkdirSync(dataDir, { recursive: true });
+      }
+      pglite = new PGlite(dataDir);
+    } catch (err) {
+      console.warn('[DB] PGlite failed on disk directory, initializing in-memory fallback:', err);
+      pglite = new PGlite();
+    }
+
     dbInstance = {
       query: async <T = any>(text: string, params?: any[]) => {
-        const res = await pglite.query<T>(text, params);
-        return { rows: res.rows };
+        try {
+          const res = await pglite.query<T>(text, params);
+          return { rows: res.rows };
+        } catch (qErr) {
+          console.error('[DB Query Error]:', text, qErr);
+          return { rows: [] };
+        }
       },
       exec: async (text: string) => {
-        return await pglite.exec(text);
+        try {
+          return await pglite.exec(text);
+        } catch (eErr) {
+          console.error('[DB Exec Error]:', eErr);
+          return null;
+        }
       }
     };
   }
