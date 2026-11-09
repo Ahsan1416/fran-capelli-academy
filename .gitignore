@@ -1,0 +1,28 @@
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# Next.js
+/.next/
+/out/
+/build
+
+# TypeScript
+*.tsbuildinfo
+
+# Database temporary runtime locks
+data/fca_postgres/postmaster.pid
+data/fca_postgres/*.lock*
+data/fca_postgres/.s.PGSQL.*
+
+# Temporary / Scratch
+scratch/
+download_test/
+
+# OS / Logs
+.DS_Store
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

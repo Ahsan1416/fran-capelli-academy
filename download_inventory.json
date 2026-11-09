@@ -1,0 +1,182 @@
+[
+  {
+    "id": "logo",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/07/cropped-Fran-capelli-logo-small-Transparent-2.png",
+    "dest": "public/images/fca/logo.png",
+    "role": "Main Site Logo"
+  },
+  {
+    "id": "logo-v1",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/08/logo_v1.png",
+    "dest": "public/images/fca/logo-alt.png",
+    "role": "Alternate Logo Badge"
+  },
+  {
+    "id": "hero-header",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/08/header.png",
+    "dest": "public/images/fca/hero-header.png",
+    "role": "Homepage Main Hero Visual"
+  },
+  {
+    "id": "hero-left",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/08/left_image.png",
+    "dest": "public/images/fca/about-hero.png",
+    "role": "About Academy Feature"
+  },
+  {
+    "id": "map-aus",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/08/map-2.png",
+    "dest": "public/images/fca/australia-map.png",
+    "role": "National Locations Map"
+  },
+  {
+    "id": "student-support",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/07/Support-from-your-first-conversation-with-us-throughout-your-training-and-as-you-move-toward-completion-and-your-next-step.png",
+    "dest": "public/images/fca/student-support.png",
+    "role": "Student Journey & Support Banner"
+  },
+  {
+    "id": "hairdressing-1",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/08/Untitled-design-96.png",
+    "dest": "public/images/fca/courses/hairdressing-hero.png",
+    "role": "Hairdressing Course Hero & Category"
+  },
+  {
+    "id": "hairdressing-2",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/08/Untitled-design-95.png",
+    "dest": "public/images/fca/courses/hairdressing-salon.png",
+    "role": "Hairdressing Salon Practice"
+  },
+  {
+    "id": "hairdressing-3",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/07/17.png",
+    "dest": "public/images/fca/courses/hairdressing-styling.png",
+    "role": "Hairdressing Styling Techniques"
+  },
+  {
+    "id": "hairdressing-4",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/07/6-1.png",
+    "dest": "public/images/fca/courses/hairdressing-client.png",
+    "role": "Hairdressing Apprenticeship Practical"
+  },
+  {
+    "id": "barbering-1",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/07/Untitled-design-42.png",
+    "dest": "public/images/fca/courses/barbering-hero.png",
+    "role": "Barbering Course Hero & Category"
+  },
+  {
+    "id": "barbering-2",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/07/24.png",
+    "dest": "public/images/fca/courses/barbering-fades.png",
+    "role": "Barbering Precision Fades & Beards"
+  },
+  {
+    "id": "barbering-3",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/07/9-1.png",
+    "dest": "public/images/fca/courses/barbering-clipper.png",
+    "role": "Barbering Masterclass Workshop"
+  },
+  {
+    "id": "building-1",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/11/Untitled-design-2026-10-20T230442.377-1.png",
+    "dest": "public/images/fca/courses/building-cpc40120.png",
+    "role": "CPC40120 Cert IV Building & Construction"
+  },
+  {
+    "id": "building-2",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/11/Untitled-design-2026-11-04T203709.593-1.png",
+    "dest": "public/images/fca/courses/building-cpc50220.png",
+    "role": "CPC50220 Diploma of Building"
+  },
+  {
+    "id": "building-3",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/07/16.png",
+    "dest": "public/images/fca/courses/building-site.png",
+    "role": "Construction Site Management & Licencing"
+  },
+  {
+    "id": "building-4",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/07/4-3.png",
+    "dest": "public/images/fca/courses/building-plans.png",
+    "role": "Building Plans & Compliance Review"
+  },
+  {
+    "id": "childcare-1",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/08/3-1.png",
+    "dest": "public/images/fca/courses/childhood-chc30125.png",
+    "role": "CHC30125 Early Childhood Education Hero"
+  },
+  {
+    "id": "childcare-2",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/08/1-1.png",
+    "dest": "public/images/fca/courses/childhood-learning.png",
+    "role": "Early Childhood Learning Environment"
+  },
+  {
+    "id": "childcare-3",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/08/4-1.png",
+    "dest": "public/images/fca/courses/childhood-development.png",
+    "role": "Child Development & Play Practice"
+  },
+  {
+    "id": "childcare-4",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/08/5.png",
+    "dest": "public/images/fca/courses/childhood-care.png",
+    "role": "Early Childhood Classroom Experience"
+  },
+  {
+    "id": "community-1",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/10/CHC52025.jpg",
+    "dest": "public/images/fca/courses/community-chc52025.jpg",
+    "role": "CHC52025 Diploma of Community Services"
+  },
+  {
+    "id": "community-2",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/10/CHC52025-diploma-of-community-services-FCA-francapelli-academy-scaled.jpg",
+    "dest": "public/images/fca/courses/community-teamwork.jpg",
+    "role": "Community Support Teamwork & Case Management"
+  },
+  {
+    "id": "community-3",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/10/CHC52025-diploma-of-community-services-FCA-francapelli-academy-8-scaled.jpg",
+    "dest": "public/images/fca/courses/community-advocacy.jpg",
+    "role": "Community Advocacy & Client Welfare"
+  },
+  {
+    "id": "testimonial-1",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/08/Testimonial_img-1-2.jpeg",
+    "dest": "public/images/fca/testimonials/testimonial-1.jpeg",
+    "role": "Student Testimonial 1"
+  },
+  {
+    "id": "testimonial-2",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/08/testimonial_img-11-1.jpeg",
+    "dest": "public/images/fca/testimonials/testimonial-2.jpeg",
+    "role": "Student Testimonial 2"
+  },
+  {
+    "id": "popular-post",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/08/popular-post_img-2-1.jpeg",
+    "dest": "public/images/fca/blog/popular-post.jpeg",
+    "role": "Featured Blog Visual"
+  },
+  {
+    "id": "icon-students",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/08/funfacts-icon-2.png",
+    "dest": "public/images/fca/icons/icon-students.png",
+    "role": "Stats: Enrolled Students"
+  },
+  {
+    "id": "icon-courses",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/08/funfacts-icon-3.png",
+    "dest": "public/images/fca/icons/icon-courses.png",
+    "role": "Stats: Accredited Courses"
+  },
+  {
+    "id": "icon-awards",
+    "url": "https://www.fca.edu.au/wp-content/uploads/2026/08/funfacts-icon-4.png",
+    "dest": "public/images/fca/icons/icon-awards.png",
+    "role": "Stats: Industry Awards"
+  }
+]

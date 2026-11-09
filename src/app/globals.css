@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #00512C;
+  --primary-dark: #00381e;
+  --mint: #14C88C;
+  --gold: #C5A059;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  color: #1e293b;
+  background-color: #f8fafc;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* Base typography enhancements for 16px comfort */
+p, li, span, input, select, textarea {
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+/* Custom button styles matching FCA design */
+.fca-btn-primary {
+  @apply inline-flex items-center justify-center font-bold px-6 py-3.5 rounded-xl text-white bg-fca-green hover:bg-fca-green-dark transition-all duration-200 shadow-sm hover:shadow-md text-base;
+}
+
+.fca-btn-secondary {
+  @apply inline-flex items-center justify-center font-bold px-6 py-3.5 rounded-xl text-fca-green bg-fca-green-subtle border border-emerald-200 hover:bg-emerald-100 transition-all duration-200 text-base;
+}
+
+.fca-btn-outline {
+  @apply inline-flex items-center justify-center font-bold px-6 py-3.5 rounded-xl text-fca-green border-2 border-fca-green hover:bg-fca-green hover:text-white transition-all duration-200 text-base;
+}
+
+.fca-badge {
+  @apply inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-50 text-emerald-900 border border-emerald-200;
+}
+
+.fca-card {
+  @apply bg-white rounded-3xl border border-slate-200/90 shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden;
+}
+
+@keyframes fcaShimmer {
+  0% { transform: translateX(-150%); }
+  100% { transform: translateX(150%); }
+}
+
+@keyframes fcaPulseSlow {
+  0%, 100% { opacity: 0.25; transform: scale(0.98); }
+  50% { opacity: 0.5; transform: scale(1.04); }
+}
+
+@keyframes ambientFloat {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -40px) scale(1.08);
+  }
+  66% {
+    transform: translate(-25px, 25px) scale(0.95);
+  }
+}
+
+@keyframes ambientFloatReverse {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(-35px, 35px) scale(1.06);
+  }
+  66% {
+    transform: translate(25px, -30px) scale(0.94);
+  }
+}
+
+.animate-fca-shimmer {
+  animation: fcaShimmer 3s ease-in-out infinite;
+}
+
+.animate-fca-pulse-slow {
+  animation: fcaPulseSlow 5s ease-in-out infinite;
+}
+
+.animate-ambient-1 {
+  animation: ambientFloat 18s ease-in-out infinite;
+}
+
+.animate-ambient-2 {
+  animation: ambientFloatReverse 22s ease-in-out infinite;
+}
+
+.animate-ambient-3 {
+  animation: ambientFloat 26s ease-in-out infinite 3s;
+}
+
