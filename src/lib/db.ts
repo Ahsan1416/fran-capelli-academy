@@ -62,7 +62,7 @@ export async function getDB(): Promise<DBClient> {
       }
     }
 
-    let pglite: PGlite;
+    let pglite: PGlite | null = null;
     try {
       if (!fs.existsSync(dataDir)) {
         fs.mkdirSync(dataDir, { recursive: true });
@@ -70,11 +70,17 @@ export async function getDB(): Promise<DBClient> {
       pglite = new PGlite(dataDir);
     } catch (err) {
       console.warn('[DB] PGlite failed on disk directory, initializing in-memory fallback:', err);
-      pglite = new PGlite();
+      try {
+        pglite = new PGlite();
+      } catch (memErr) {
+        console.warn('[DB] In-memory PGlite failed, using safe fallback:', memErr);
+        pglite = null;
+      }
     }
 
     dbInstance = {
       query: async <T = any>(text: string, params?: any[]) => {
+        if (!pglite) return { rows: [] };
         try {
           const res = await pglite.query<T>(text, params);
           return { rows: res.rows };
@@ -84,6 +90,7 @@ export async function getDB(): Promise<DBClient> {
         }
       },
       exec: async (text: string) => {
+        if (!pglite) return null;
         try {
           return await pglite.exec(text);
         } catch (eErr) {

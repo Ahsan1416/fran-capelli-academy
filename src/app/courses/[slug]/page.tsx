@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { getDB } from '@/lib/db';
 import { getCurrentAdmin } from '@/lib/auth';
 import { getWpPostBySlug, parseCourseFromWpHtml } from '@/lib/wordpress';
+import { DEFAULT_COURSES } from '@/lib/defaultData';
 import { 
   ShieldCheck, 
   Clock, 
@@ -254,7 +255,8 @@ export default async function CourseOrCategoryPage({ params, searchParams }: Cou
   if (knownCategories[slug]) {
     const cat = knownCategories[slug];
     const catCoursesRes = await db.query('SELECT * FROM courses WHERE category_slug = $1 ORDER BY id ASC', [slug]);
-    const catCourses = catCoursesRes.rows;
+    const dbCatCourses = catCoursesRes.rows || [];
+    const catCourses = dbCatCourses.length > 0 ? dbCatCourses : DEFAULT_COURSES.filter(c => c.category_slug === slug);
 
     return (
       <div className="bg-slate-50 min-h-screen py-10">
@@ -353,11 +355,15 @@ export default async function CourseOrCategoryPage({ params, searchParams }: Cou
 
   // 2. INDIVIDUAL COURSE VIEW
   const courseRes = await db.query('SELECT * FROM courses WHERE slug = $1 LIMIT 1', [slug]);
-  if (courseRes.rows.length === 0) {
-    notFound();
+  let course = courseRes.rows?.[0];
+  if (!course) {
+    const fallback = DEFAULT_COURSES.find(c => c.slug === slug || c.code.toLowerCase() === slug.toLowerCase());
+    if (fallback) {
+      course = { ...fallback };
+    } else {
+      notFound();
+    }
   }
-
-  let course = courseRes.rows[0];
 
   // If admin preview is active and draft_data exists, merge draft changes
   let isDraftPreviewing = false;
@@ -381,9 +387,26 @@ export default async function CourseOrCategoryPage({ params, searchParams }: Cou
     }
   }
 
-  const outcomes = JSON.parse(course.career_outcomes || '[]');
-  const states = JSON.parse(course.states_available || '[]');
-  const faqs = JSON.parse(course.faqs || '[]');
+  let outcomes: string[] = [];
+  try {
+    outcomes = typeof course.career_outcomes === 'string' ? JSON.parse(course.career_outcomes || '[]') : (course.career_outcomes || []);
+  } catch {
+    outcomes = [];
+  }
+
+  let states: string[] = [];
+  try {
+    states = typeof course.states_available === 'string' ? JSON.parse(course.states_available || '[]') : (course.states_available || []);
+  } catch {
+    states = [];
+  }
+
+  let faqs: any[] = [];
+  try {
+    faqs = typeof course.faqs === 'string' ? JSON.parse(course.faqs || '[]') : (course.faqs || []);
+  } catch {
+    faqs = [];
+  }
 
   // Match Curriculum units
   const unitsData = COURSE_UNITS_DATA[course.code] || null;
