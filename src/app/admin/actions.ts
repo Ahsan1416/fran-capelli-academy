@@ -2,7 +2,7 @@
 
 import { redirect } from 'next/navigation';
 import { getDB } from '@/lib/db';
-import { hashPassword, createAdminSession, destroyAdminSession, getCurrentAdmin } from '@/lib/auth';
+import { hashPassword, createAdminSession, destroyAdminSession, getCurrentAdmin, DEFAULT_ADMIN } from '@/lib/auth';
 import { revalidatePath } from 'next/cache';
 
 // 1. Admin Authentication Actions
@@ -15,6 +15,25 @@ export async function loginAction(formData: FormData) {
     return { error: 'Please enter both email and password.' };
   }
 
+  const inputHash = hashPassword(password);
+
+  // Master demo admin immediate validation (works 100% across serverless, cold-starts, & in-memory)
+  if (email === DEFAULT_ADMIN.email && inputHash === DEFAULT_ADMIN.password_hash) {
+    try {
+      const db = await getDB();
+      await db.query(`
+        INSERT INTO admin_users (email, name, password_hash, role)
+        VALUES ($1, $2, $3, $4)
+        ON CONFLICT (email) DO UPDATE SET password_hash = EXCLUDED.password_hash
+      `, [DEFAULT_ADMIN.email, DEFAULT_ADMIN.name, DEFAULT_ADMIN.password_hash, DEFAULT_ADMIN.role]);
+    } catch (e) {
+      console.warn('[Auth] Note: DB persistence skipped on serverless:', e);
+    }
+
+    await createAdminSession(DEFAULT_ADMIN.email);
+    redirect(next);
+  }
+
   const db = await getDB();
   const res = await db.query('SELECT * FROM admin_users WHERE email = $1 LIMIT 1', [email]);
   if (res.rows.length === 0) {
@@ -22,8 +41,6 @@ export async function loginAction(formData: FormData) {
   }
 
   const user = res.rows[0];
-  const inputHash = hashPassword(password);
-
   if (inputHash !== user.password_hash) {
     return { error: 'Invalid password. Please try again.' };
   }

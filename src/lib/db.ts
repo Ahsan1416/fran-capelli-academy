@@ -119,6 +119,18 @@ async function ensureSchema(db: DBClient) {
         console.log('[DB] Schema successfully created.');
       }
     }
+
+    // Auto-seed default admin user if missing
+    await db.query(`
+      INSERT INTO admin_users (email, name, password_hash, role)
+      VALUES ($1, $2, $3, $4)
+      ON CONFLICT (email) DO NOTHING
+    `, [
+      'admin@fca.edu.au',
+      'FCA Academy Administrator',
+      '4fd1f9f2d6dfaddf6e5128f801f8f9da315ed5c8e9a49238c67470672018acc0',
+      'superadmin'
+    ]);
   } catch (err) {
     console.error('[DB] Schema initialization notice:', err);
   }

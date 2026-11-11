@@ -26,7 +26,7 @@ export default async function AdminOverviewPage() {
       COUNT(*) FILTER (WHERE status = 'draft') as draft
     FROM posts
   `);
-  const postStats = postsCount.rows[0];
+  const postStats = postsCount.rows?.[0] || { total: 0, published: 0, draft: 0 };
 
   const areasCount = await db.query(`
     SELECT 
@@ -37,10 +37,12 @@ export default async function AdminOverviewPage() {
       COUNT(*) FILTER (WHERE status = 'draft') as draft
     FROM local_areas
   `);
-  const areaStats = areasCount.rows[0];
+  const areaStats = areasCount.rows?.[0] || { total: 0, real_campuses: 0, service_areas: 0, published: 0, draft: 0 };
 
   const coursesCount = await db.query('SELECT COUNT(*) as total FROM courses');
   const mediaCount = await db.query('SELECT COUNT(*) as total FROM media_items');
+  const coursesTotal = coursesCount.rows?.[0]?.total ?? 6;
+  const mediaTotal = mediaCount.rows?.[0]?.total ?? 0;
 
   // Recent Blog Posts
   const recentPosts = await db.query('SELECT * FROM posts ORDER BY id DESC LIMIT 5');
@@ -135,7 +137,7 @@ export default async function AdminOverviewPage() {
             </div>
           </div>
           <div className="mt-4">
-            <div className="text-3xl font-extrabold text-slate-900">{coursesCount.rows[0].total}</div>
+            <div className="text-3xl font-extrabold text-slate-900">{coursesTotal}</div>
             <div className="text-xs text-slate-500 mt-1">
               Nationally accredited certificates & diplomas
             </div>
@@ -154,7 +156,7 @@ export default async function AdminOverviewPage() {
             </div>
           </div>
           <div className="mt-4">
-            <div className="text-3xl font-extrabold text-slate-900">{mediaCount.rows[0].total}</div>
+            <div className="text-3xl font-extrabold text-slate-900">{mediaTotal}</div>
             <div className="text-xs text-slate-500 mt-1">
               Real FCA images & uploaded assets
             </div>

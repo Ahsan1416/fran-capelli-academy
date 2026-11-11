@@ -180,3 +180,8 @@ CREATE INDEX IF NOT EXISTS idx_local_areas_status ON local_areas(status);
 CREATE INDEX IF NOT EXISTS idx_local_areas_slug ON local_areas(slug);
 CREATE INDEX IF NOT EXISTS idx_courses_slug ON courses(slug);
 CREATE INDEX IF NOT EXISTS idx_pages_slug ON pages(slug);
+
+-- Auto-seed default Administrator Account
+INSERT INTO admin_users (email, name, password_hash, role)
+VALUES ('admin@fca.edu.au', 'FCA Academy Administrator', '4fd1f9f2d6dfaddf6e5128f801f8f9da315ed5c8e9a49238c67470672018acc0', 'superadmin')
+ON CONFLICT (email) DO NOTHING;
