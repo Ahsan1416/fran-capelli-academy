@@ -3,7 +3,7 @@ import path from 'path';
 
 const WP_URL = process.env.WORDPRESS_URL || 'https://darkgray-llama-274719.hostingersite.com';
 const WP_USER = process.env.WORDPRESS_USER || 'admin';
-const WP_APP_PASSWORD = process.env.WORDPRESS_APP_PASSWORD || 'Ls99 Aowe mQZt Yg9D RAAW mcum';
+const WP_APP_PASSWORD = process.env.WORDPRESS_APP_PASSWORD || '';
 const WP_AUTH = Buffer.from(`${WP_USER}:${WP_APP_PASSWORD}`).toString('base64');
 
 const headers = {
